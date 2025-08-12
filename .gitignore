@@ -209,4 +209,6 @@ __marimo__/
 .venv
 env/
 venv/
+myenv/
+api_key.txt
 
