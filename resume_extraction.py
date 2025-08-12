@@ -18,16 +18,12 @@ def clean_resume_text(text):
     text = '\n'.join(line.rstrip() for line in text.split('\n'))
     return text.strip()
 
-all_text = ""
+def extract_resume_text(pdf_path):
+    resume_text = ""  
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:  
+                resume_text += page_text + "\n"
 
-with pdfplumber.open("Srinath.K Resume.pdf") as pdf:
-    for page in pdf.pages:
-        page_text = page.extract_text()
-        if page_text:  
-            all_text += page_text + "\n"
-
-
-
-
-print(clean_resume_text(all_text))
-
+    return clean_resume_text(resume_text)
